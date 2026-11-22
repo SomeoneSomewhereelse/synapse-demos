@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Spreadsheet Calculations Task</title>
+<style>:root{--page-bg:var(--bg,#f7f9fc);--page-ink:var(--ink,#111c35);--page-dim:var(--dim,#4a5873);--page-line:var(--line,#b8c2d1);--page-card:var(--card,#fff);--page-accent:var(--cyan-deep,#1c93ac);--font-text:"Heebo Variable", system-ui, sans-serif}@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--lightningcss-light: ;--lightningcss-dark:initial;color-scheme:dark}}:root[data-theme=dark]{--lightningcss-light: ;--lightningcss-dark:initial;color-scheme:dark}body{background:var(--page-bg);color:var(--page-ink);font-family:var(--font-text);margin:0}.page{max-width:1180px;padding-block:28px 48px;padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));gap:24px;margin:0 auto;display:grid}.brief,.notes{justify-self:left;gap:10px;width:100%;max-width:72ch;display:grid}.eyebrow{letter-spacing:.08em;text-transform:uppercase;margin:0;font-size:12px;font-weight:700}h1{text-wrap:balance;margin:0;font-size:clamp(26px,4vw,36px);line-height:1.15}h2{text-wrap:balance;margin:8px 0 0;font-size:20px}p,li{margin:0;font-size:16px;line-height:1.6}.lede{color:var(--page-dim)}ul{gap:4px;margin:0;padding-inline-start:20px;display:grid}#sheet-demo{gap:16px;min-width:0;display:grid}.sd-controls{gap:10px;display:grid}.sd-group{flex-wrap:wrap;align-items:center;gap:6px;display:flex}.sd-label{letter-spacing:.04em;text-transform:uppercase;color:var(--page-dim);min-width:76px;font-size:13px;font-weight:700}.sd-chip{font:inherit;cursor:pointer;border:1px solid var(--page-line);background:var(--page-card);color:var(--page-ink);border-radius:999px;padding:6px 12px;font-size:15px}.sd-chip[aria-pressed=true]{border-color:var(--page-accent);box-shadow:inset 0 0 0 1px var(--page-accent);font-weight:600}.sd-chip:focus-visible,.sd-file:focus-visible{outline:2px solid var(--page-accent);outline-offset:2px}.sd-files{border:1px solid var(--page-line);background:var(--page-card);border-radius:10px;gap:12px;padding:16px;display:grid}.sd-files h2{margin:0;font-size:18px}.sd-file-btns{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px;display:grid}.sd-file{font:inherit;text-align:start;cursor:pointer;border:1px solid var(--page-line);background:var(--page-bg);color:var(--page-ink);border-radius:8px;gap:2px;padding:10px 12px;display:grid}.sd-file b{font-size:15px}.sd-file span{color:var(--page-dim);font-size:14px}.sd-note{color:var(--page-dim);font-size:15px}.sd-sheet summary{cursor:pointer;font-size:15px;font-weight:600}.sd-table-wrap{border:1px solid var(--page-line);border-radius:8px;margin-top:8px;overflow-x:auto}.sd-table-wrap table{min-width:0;font-size:14px}.sd-table-wrap th,.sd-table-wrap td{font-variant-numeric:tabular-nums;padding:4px 10px}.sd-stage{min-width:0}.table-wrap{border:1px solid var(--page-line);border-radius:10px;overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}.table-wrap table{min-width:620px}th,td{text-align:start;vertical-align:top;border-bottom:1px solid var(--page-line);padding:10px 12px;line-height:1.45}thead th{background:var(--page-card);letter-spacing:.04em;color:var(--page-dim);font-size:13px}tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}tbody th{white-space:nowrap;font-weight:600}.notes-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px;display:grid}.notes-grid>section{align-content:start;gap:8px;min-width:0;display:grid}.foot{color:var(--page-dim);font-size:14px}code{font-size:.92em}</style>
+  <script type="module" crossorigin src="./assets/sheet-calc-DNNiGwNc.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/SheetCalculation-BRmoDPPv.js">
+  <link rel="stylesheet" crossorigin href="./assets/SheetCalculation-D8kvfFcz.css">
+</head>
+<body>
+<div class="page">
+  <header class="brief" dir="ltr" lang="en">
+    <p class="eyebrow">Issue #168 &middot; for team review</p>
+    <h1>Spreadsheet calculations task</h1>
+    <p class="lede">The participant downloads an orders and stock spreadsheet, opens it in their own spreadsheet program, adds a Total column, a SUM of it and a Yes/No "Low stock" column, all as formulas, and uploads it back to be checked. Below is the real task from the build, running in the page.</p>
+    <ul>
+      <li><b>Pick</b> a level, a version (workplace) and a language.</li>
+      <li><b>Download</b> the file, change it in Excel, Google Sheets, LibreOffice or Numbers, save it as .xlsx and upload it back.</li>
+      <li><b>Or</b> send one of the ready-made files for a quick look.</li>
+      <li><b>Press</b> the check button to see the verdict, then open the answer key.</li>
+    </ul>
+  </header>
+
+  <main aria-label="Live task">
+    <div id="sheet-demo"></div>
+  </main>
+
+  <div class="notes" dir="ltr" lang="en">
+    <h2>What changes by level</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col"></th><th scope="col">Easy (m22)</th><th scope="col">Medium (m23)</th><th scope="col">Hard (m24)</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Rows</th><td>8</td><td>12</td><td>15</td></tr>
+          <tr><th scope="row">Instructions</th><td>One step at a time, with the exact formulas: <code>=B2*C2</code>, <code>=SUM(F2:F9)</code>, <code>=IF(D2&lt;E2,"Yes","No")</code></td><td>Names the columns and the sum cell, but not the formulas</td><td>Only the business request, plus "use formulas and SUM"</td></tr>
+          <tr><th scope="row">Traps</th><td>None</td><td>One item exactly at its minimum (not low)</td><td>An item at its minimum, and one with quantity 0</td></tr>
+          <tr><th scope="row">Where things go</th><td>Fixed cells</td><td>Fixed cells</td><td>Anywhere after column E; found by content. The SUM may sit beside the table</td></tr>
+          <tr><th scope="row">Time target</th><td>15 min</td><td>18 min</td><td>20 min</td></tr>
+          <tr><th scope="row">Place in the ranking</th><td>6 of 22</td><td>14 of 22</td><td>21 of 22</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="notes-grid" dir="ltr" lang="en">
+    <section>
+      <h2>What is checked</h2>
+      <ul>
+        <li>Columns A–E and the rows came back as handed out (headings and items in either language; a sum row and new columns are fine).</li>
+        <li>Every Total is right, to the cent, and calculated.</li>
+        <li>The SUM is right and is a <code>SUM(…)</code> formula.</li>
+        <li>Every row says Yes or No (כן / לא) correctly, by formula. An item exactly at its minimum is not low.</li>
+        <li>A typed number, or a formula over plain numbers like <code>=SUM(695.2)</code>, counts as typed.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Try the unexpected</h2>
+      <ul>
+        <li>Some totals as formulas, some typed.</li>
+        <li>TRUE/FALSE instead of Yes/No.</li>
+        <li>Format the data as a table (formulas like <code>[@Qty]</code>), or use its Total Row.</li>
+        <li>A named range, the SUM beside the table, or a count under it.</li>
+        <li>Insert a column between A and E, sort, or delete a row.</li>
+        <li>Save as .xls, .csv or .ods; upload another level's file.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>How it fits sessions</h2>
+      <ul>
+        <li>Three task ids, m22–m24, one level each; a session holds at most one of them.</li>
+        <li>"Quick start" (the default six, no Excel) is now the first option in "Level and tasks".</li>
+        <li>"Easy" now includes the easy level of this task.</li>
+        <li>Never in the random draw, the free trial or the default setup; a test now fails if it gets there.</li>
+        <li>Presentation mode shows one card with Easy / Medium / Hard.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Please look at</h2>
+      <ul>
+        <li>The easy steps, and "Next step" / "Previous step".</li>
+        <li>Whether the medium and hard requests are clear enough.</li>
+        <li>The hints after a wrong file.</li>
+        <li>The Hebrew wording, and the formulas inside the Hebrew steps.</li>
+        <li>The answer key.</li>
+        <li>Any file graded wrongly: keep it and send it to us.</li>
+      </ul>
+    </section>
+  </div>
+
+  <p class="foot" dir="ltr" lang="en">Demo only: files are checked in your browser and never uploaded anywhere, and all items and numbers are made up. Not yet on staging. <a href="./presentation.html">Presentation mode preview</a></p>
+</div>
+</body>
+</html>

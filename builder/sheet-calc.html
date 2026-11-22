@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Spreadsheet Calculations Task</title>
+<style>
+  /* Layout: a short brief, demo controls, the live task full width, then reference notes. */
+  :root {
+    --page-bg: var(--bg, #f7f9fc);
+    --page-ink: var(--ink, #111c35);
+    --page-dim: var(--dim, #4a5873);
+    --page-line: var(--line, #b8c2d1);
+    --page-card: var(--card, #ffffff);
+    --page-accent: var(--cyan-deep, #1c93ac);
+    --font-text: "Heebo Variable", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { color-scheme: dark; } }
+  :root[data-theme="dark"] { color-scheme: dark; }
+  body { margin: 0; background: var(--page-bg); color: var(--page-ink); font-family: var(--font-text); }
+  .page {
+    max-width: 1180px; margin: 0 auto; padding-block: 28px 48px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: grid; gap: 24px;
+  }
+  .brief, .notes { max-width: 72ch; display: grid; gap: 10px; justify-self: left; width: 100%; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin: 0; }
+  h1 { font-size: clamp(26px, 4vw, 36px); line-height: 1.15; margin: 0; text-wrap: balance; }
+  h2 { font-size: 20px; margin: 8px 0 0; text-wrap: balance; }
+  p, li { font-size: 16px; line-height: 1.6; margin: 0; }
+  .lede { color: var(--page-dim); }
+  ul { margin: 0; padding-inline-start: 20px; display: grid; gap: 4px; }
+
+  #sheet-demo { display: grid; gap: 16px; min-width: 0; }
+  .sd-controls { display: grid; gap: 10px; }
+  .sd-group { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .sd-label { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--page-dim); min-width: 76px; }
+  .sd-chip {
+    font: inherit; font-size: 15px; padding: 6px 12px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--page-line); background: var(--page-card); color: var(--page-ink);
+  }
+  .sd-chip[aria-pressed="true"] { border-color: var(--page-accent); box-shadow: inset 0 0 0 1px var(--page-accent); font-weight: 600; }
+  .sd-chip:focus-visible, .sd-file:focus-visible { outline: 2px solid var(--page-accent); outline-offset: 2px; }
+  .sd-files { display: grid; gap: 12px; padding: 16px; border: 1px solid var(--page-line); border-radius: 10px; background: var(--page-card); }
+  .sd-files h2 { margin: 0; font-size: 18px; }
+  .sd-file-btns { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+  .sd-file {
+    font: inherit; text-align: start; display: grid; gap: 2px; cursor: pointer; padding: 10px 12px;
+    border: 1px solid var(--page-line); border-radius: 8px; background: var(--page-bg); color: var(--page-ink);
+  }
+  .sd-file b { font-size: 15px; }
+  .sd-file span { font-size: 14px; color: var(--page-dim); }
+  .sd-note { font-size: 15px; color: var(--page-dim); }
+  .sd-sheet summary { cursor: pointer; font-size: 15px; font-weight: 600; }
+  .sd-table-wrap { overflow-x: auto; margin-top: 8px; border: 1px solid var(--page-line); border-radius: 8px; }
+  .sd-table-wrap table { min-width: 0; font-size: 14px; }
+  .sd-table-wrap th, .sd-table-wrap td { padding: 4px 10px; font-variant-numeric: tabular-nums; }
+  .sd-stage { min-width: 0; }
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--page-line); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; }
+  .table-wrap table { min-width: 620px; }
+  th, td { text-align: start; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--page-line); line-height: 1.45; }
+  thead th { background: var(--page-card); font-size: 13px; letter-spacing: 0.04em; color: var(--page-dim); }
+  tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
+  tbody th { font-weight: 600; white-space: nowrap; }
+  .notes-grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+  .notes-grid > section { display: grid; gap: 8px; align-content: start; min-width: 0; }
+  .foot { color: var(--page-dim); font-size: 14px; }
+  code { font-size: 0.92em; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="brief" dir="ltr" lang="en">
+    <p class="eyebrow">Issue #168 &middot; for team review</p>
+    <h1>Spreadsheet calculations task</h1>
+    <p class="lede">The participant downloads an orders and stock spreadsheet, opens it in their own spreadsheet program, adds a Total column, a SUM of it and a Yes/No "Low stock" column, all as formulas, and uploads it back to be checked. Below is the real task from the build, running in the page.</p>
+    <ul>
+      <li><b>Pick</b> a level, a version (workplace) and a language.</li>
+      <li><b>Download</b> the file, change it in Excel, Google Sheets, LibreOffice or Numbers, save it as .xlsx and upload it back.</li>
+      <li><b>Or</b> send one of the ready-made files for a quick look.</li>
+      <li><b>Press</b> the check button to see the verdict, then open the answer key.</li>
+    </ul>
+  </header>
+
+  <main aria-label="Live task">
+    <div id="sheet-demo"></div>
+  </main>
+
+  <div class="notes" dir="ltr" lang="en">
+    <h2>What changes by level</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col"></th><th scope="col">Easy (m22)</th><th scope="col">Medium (m23)</th><th scope="col">Hard (m24)</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Rows</th><td>8</td><td>12</td><td>15</td></tr>
+          <tr><th scope="row">Instructions</th><td>One step at a time, with the exact formulas: <code>=B2*C2</code>, <code>=SUM(F2:F9)</code>, <code>=IF(D2&lt;E2,"Yes","No")</code></td><td>Names the columns and the sum cell, but not the formulas</td><td>Only the business request, plus "use formulas and SUM"</td></tr>
+          <tr><th scope="row">Traps</th><td>None</td><td>One item exactly at its minimum (not low)</td><td>An item at its minimum, and one with quantity 0</td></tr>
+          <tr><th scope="row">Where things go</th><td>Fixed cells</td><td>Fixed cells</td><td>Anywhere after column E; found by content. The SUM may sit beside the table</td></tr>
+          <tr><th scope="row">Time target</th><td>15 min</td><td>18 min</td><td>20 min</td></tr>
+          <tr><th scope="row">Place in the ranking</th><td>6 of 22</td><td>14 of 22</td><td>21 of 22</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="notes-grid" dir="ltr" lang="en">
+    <section>
+      <h2>What is checked</h2>
+      <ul>
+        <li>Columns A–E and the rows came back as handed out (headings and items in either language; a sum row and new columns are fine).</li>
+        <li>Every Total is right, to the cent, and calculated.</li>
+        <li>The SUM is right and is a <code>SUM(…)</code> formula.</li>
+        <li>Every row says Yes or No (כן / לא) correctly, by formula. An item exactly at its minimum is not low.</li>
+        <li>A typed number, or a formula over plain numbers like <code>=SUM(695.2)</code>, counts as typed.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Try the unexpected</h2>
+      <ul>
+        <li>Some totals as formulas, some typed.</li>
+        <li>TRUE/FALSE instead of Yes/No.</li>
+        <li>Format the data as a table (formulas like <code>[@Qty]</code>), or use its Total Row.</li>
+        <li>A named range, the SUM beside the table, or a count under it.</li>
+        <li>Insert a column between A and E, sort, or delete a row.</li>
+        <li>Save as .xls, .csv or .ods; upload another level's file.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>How it fits sessions</h2>
+      <ul>
+        <li>Three task ids, m22–m24, one level each; a session holds at most one of them.</li>
+        <li>"Quick start" (the default six, no Excel) is now the first option in "Level and tasks".</li>
+        <li>"Easy" now includes the easy level of this task.</li>
+        <li>Never in the random draw, the free trial or the default setup; a test now fails if it gets there.</li>
+        <li>Presentation mode shows one card with Easy / Medium / Hard.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Please look at</h2>
+      <ul>
+        <li>The easy steps, and "Next step" / "Previous step".</li>
+        <li>Whether the medium and hard requests are clear enough.</li>
+        <li>The hints after a wrong file.</li>
+        <li>The Hebrew wording, and the formulas inside the Hebrew steps.</li>
+        <li>The answer key.</li>
+        <li>Any file graded wrongly: keep it and send it to us.</li>
+      </ul>
+    </section>
+  </div>
+
+  <p class="foot" dir="ltr" lang="en">Demo only: files are checked in your browser and never uploaded anywhere, and all items and numbers are made up. Not yet on staging. <a href="./presentation.html">Presentation mode preview</a></p>
+</div>
+<script type="module" src="./demo-entry.jsx"></script>
+</body>
+</html>
